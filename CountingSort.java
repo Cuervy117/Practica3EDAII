@@ -1,81 +1,98 @@
+import java.util.Arrays;
 import java.util.Scanner;
-class CoutintSort{
-    static char[] leerLista(){
-        Scanner sc = new Scanner(System.in)
-        char[] arreglo = new char[20]
-        for(int i = 0; i < 20; i++){
-            arreglo[i] = sc.next();
+public class CountingSort{
+    public static void leerLista(String arreglo[], Scanner sc){
+        for(int i = 0; i < arreglo.length; i++){
+            arreglo[i] = sc.nextLine();
         }   
-        return arreglo;
     }
 
-    static char[] countingSort(char arr[]){
-        int[] Letras = new int[10];
-        Letras = 0;
-        char[] ordenado = new char[20];
+    public static void conteo(String[] arr, int[] letras){
         for(int i = 0; i < arr.length; i++){
             switch(arr[i]){
-                case "A" -> Letras[0] += 1;
-                case "B" -> Letras[1] += 1;
-                case "C" -> Letras[2] += 1;
-                case "D" -> Letras[3] += 1;
-                case "E" -> Letras[4] += 1;
-                case "F" -> Letras[5] += 1;
-                case "G" -> Letras[6] += 1;
-                case "H" -> Letras[7] += 1;
-                case "I" -> Letras[8] += 1;
-                case "J" -> Letras[9] += 1;   
+                case "A" -> letras[0] += 1;
+                case "B" -> letras[1] += 1;
+                case "C" -> letras[2] += 1;
+                case "D" -> letras[3] += 1;
+                case "E" -> letras[4] += 1;
+                case "F" -> letras[5] += 1;
+                case "G" -> letras[6] += 1;
+                case "H" -> letras[7] += 1;
+                case "I" -> letras[8] += 1;
+                case "J" -> letras[9] += 1;   
             }
         }
-        MergeSort.printArray(Letras);
-        for(int i = 1; i < Letras.length; i++){
-            Letras[i] += Letras[i - 1];
+    }
+
+    public static void sumaConteo(int[] letras){
+        for(int i = 1; i < letras.length; i++){
+            letras[i] += letras[i - 1];
         }
-        MergeSort.printArray(Letras);
+    }
+
+    public static void acomodo(int[] letras, String[] ordenado, String[] arr){
+        Arrays.fill(ordenado, "0");
         for(int i = arr.length-1; i >= 0; i--){
             switch(arr[i]){
                 case "A" -> {
-                    ordenado[Letras[0] - 1 ] = arr[i];
-                    Letras[0] -= 1;
-                };
+                    ordenado[letras[0] - 1 ] = arr[i];
+                    letras[0] -= 1;
+                }
                 case "B" -> {
-                    ordenado[Letras[1] - 1 ] = arr[i];
-                    Letras[1] -= 1;
-                };
+                    ordenado[letras[1] - 1 ] = arr[i];
+                    letras[1] -= 1;
+                }
                 case "C" -> {
-                    ordenado[Letras[2] - 1 ] = arr[i];
-                    Letras[2] -= 1;
-                };
+                    ordenado[letras[2] - 1 ] = arr[i];
+                    letras[2] -= 1;
+                }
                 case "D" -> {
-                    ordenado[Letras[3] - 1 ] = arr[i];
-                    Letras[3] -= 1;
-                };
+                    ordenado[letras[3] - 1 ] = arr[i];
+                    letras[3] -= 1;
+                }
                 case "E" -> {
-                    ordenado[Letras[4] - 1 ] = arr[i];
-                    Letras[4] -= 1;
-                };
+                    ordenado[letras[4] - 1 ] = arr[i];
+                    letras[4] -= 1;
+                }
                 case "F" -> {
-                    ordenado[Letras[5] - 1 ] = arr[i];
-                    Letras[5] -= 1;
-                };
+                    ordenado[letras[5] - 1 ] = arr[i];
+                    letras[5] -= 1;
+                }
                 case "G" -> {
-                    ordenado[Letras[6] - 1 ] = arr[i];
-                    Letras[6] -= 1;
-                };
+                    ordenado[letras[6] - 1 ] = arr[i];
+                    letras[6] -= 1;
+                }
                 case "H" -> {
-                    ordenado[Letras[7] - 1 ] = arr[i];
-                    Letras[7] -= 1;
-                };
+                    ordenado[letras[7] - 1 ] = arr[i];
+                    letras[7] -= 1;
+                }
                 case "I" -> {
-                    ordenado[Letras[8] - 1 ] = arr[i];
-                    Letras[8] -= 1;
-                };
+                    ordenado[letras[8] - 1 ] = arr[i];
+                    letras[8] -= 1;
+                }
                 case "J" -> {
-                    ordenado[Letras[9] - 1 ] = arr[i];
-                    Letras[9] -= 1;
-                }; 
+                    ordenado[letras[9] - 1 ] = arr[i];
+                    letras[9] -= 1;
+                } 
             }
+            System.out.println("Iteracion " + (arr.length - i));
+            System.out.println("Arreglo de conteo: " + Arrays.toString(letras));
+            System.out.println("Arreglo ordenado: " + Arrays.toString(ordenado));
         }
+    }
+    
+    public static String[] countingSort(String arr[]){
+        int[] letras = new int[10];
+        String[] ordenado = new String[20];
+
+        CountingSort.conteo(arr, letras);
+        System.out.println("Arreglo de conteo: " + Arrays.toString(letras));
+
+        CountingSort.sumaConteo(letras);
+        System.out.println("Suma del arreglo de conteo: " + Arrays.toString(letras));
+
+        CountingSort.acomodo(letras, ordenado, arr);
+        
         return ordenado;
     }
 }
